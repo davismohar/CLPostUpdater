@@ -8,17 +8,14 @@ url = "https://blacksburg.craigslist.org/d/motorcycles-scooters/search/mca"
 page = urllib2.urlopen(url)
 
 soup = BeautifulSoup(page, "html.parser")
+date = datetime.datetime.now()
+print date
 #splits the homepage into the posts
-resultList = str(soup.findAll("ul", attrs= {"class": "rows"})).split("</li>")
-print(len(resultList))
-#print(resultList[0])
-print(len(soup.body.section.find_all("form")))
-
 for link in soup.body.section.find_all("li"):
     #finds the post time
     timeIndex = str(link.p).find("datetime") + 10
     time = str(link.p)[timeIndex: timeIndex + 16]
-    
+    #finds the title of the post
     titleStartIndex = str(link.p).find(".html") + 7
     titleEndIndex = str(link.p).find("</a>", titleStartIndex, len(str(link.p)))
     title = str(link.p)[titleStartIndex: titleEndIndex]

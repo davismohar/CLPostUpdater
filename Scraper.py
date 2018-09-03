@@ -25,8 +25,13 @@ for link in soup.body.section.find_all("li"):
         titleEndIndex = str(link.p).find("</a>", titleStartIndex, len(str(link.p)))
         title = str(link.p)[titleStartIndex: titleEndIndex]
         time = datetime.datetime(year, month, day, hour, minute)
+        timedifference = datetime.datetime.now() - time
         print(time)
+        print(timedifference)
         print(title)
+        
+        if(timedifference <= datetime.datetime.now() - datetime.datetime(0,0,0,12)):
+            print("NEW POST")
         print("")
 
     
